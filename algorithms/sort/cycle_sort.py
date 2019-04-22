@@ -20,27 +20,30 @@ def cycle_sort(arr):
         for i in range(cur + 1, len_arr):
             if arr[i] < item:
                 index += 1
-
         # Case of there is not a cycle
         if index == cur:
             continue
+        helpFunc1(cur, item, arr, index, len_arr)
 
-        # Putting the item immediately right after the duplicate item or on the right.
-        while item == arr[index]:
-            index += 1
-        arr[index], item = item, arr[index]
-
-        # Rotating the remaining cycle.
-        while index != cur:
-
-            # Finding where to put the item.
-            index = cur
-            for i in range(cur + 1, len_arr):
-                if arr[i] < item:
-                    index += 1
-
-            # After item is duplicated, put it in place or put it there.
-            while item == arr[index]:
-                index += 1
-            arr[index], item = item, arr[index]
     return arr
+def  helpFunc1(cur,item,arr,index,len_arr):
+    # Putting the item immediately right after the duplicate item or on the right.
+    while item == arr[index]:
+        index += 1
+    arr[index], item = item, arr[index]
+
+    # Rotating the remaining cycle.
+    while index != cur:
+        helpFunc2(cur,len_arr,arr,item)
+
+def helpFunc2(cur,len_arr,arr,item):
+    # Finding where to put the item.
+    index = cur
+    for i in range(cur + 1, len_arr):
+        if arr[i] < item:
+            index += 1
+
+    # After item is duplicated, put it in place or put it there.
+    while item == arr[index]:
+        index += 1
+    arr[index], item = item, arr[index]
