@@ -85,6 +85,28 @@ class RBTree:
         # fix the tree to 
         self.fix_insert(node)
 
+    def help_for_fix(self,node):
+        uncle_node = node.parent.parent.left
+        if uncle_node and uncle_node.color is 1:
+            # case 3.1 the uncle node is red
+            # then set parent and uncle color is black and grandparent is red
+            # then node => node.parent
+            node.parent.color = 0
+            node.parent.parent.left.color = 0
+            node.parent.parent.color = 1
+            node = node.parent.parent
+        elif node is node.parent.left:
+            # case 3.2 the uncle node is black or null, and the node is right of parent
+            # then set his parent node is current node
+            # left rotate the node and continue the next
+            node = node.parent
+            self.right_rotate(node)
+        # case 3.3 the uncle node is black and parent node is left
+        # then parent node set black and grandparent set red
+        node.parent.color = 0
+        node.parent.parent.color = 1
+        self.left_rotate(node.parent.parent)
+
     def fix_insert(self, node):
         # case 1 the parent is null, then set the inserted node as root and color = 0
         if node.parent is None:
@@ -117,28 +139,9 @@ class RBTree:
                 node.parent.parent.color = 1
                 self.right_rotate(node.parent.parent)
             else:
-                uncle_node = node.parent.parent.left
-                if uncle_node and uncle_node.color is 1:
-                    # case 3.1 the uncle node is red
-                    # then set parent and uncle color is black and grandparent is red
-                    # then node => node.parent
-                    node.parent.color = 0
-                    node.parent.parent.left.color = 0
-                    node.parent.parent.color = 1
-                    node = node.parent.parent
-                    continue
-                elif node is node.parent.left:
-                    # case 3.2 the uncle node is black or null, and the node is right of parent
-                    # then set his parent node is current node
-                    # left rotate the node and continue the next
-                    node = node.parent
-                    self.right_rotate(node)
-                # case 3.3 the uncle node is black and parent node is left
-                # then parent node set black and grandparent set red
-                node.parent.color = 0
-                node.parent.parent.color = 1
-                self.left_rotate(node.parent.parent)
+                self.help_for_fix(node)
         self.root.color = 0
+
 
     def transplant(self, node_u, node_v):
         """
