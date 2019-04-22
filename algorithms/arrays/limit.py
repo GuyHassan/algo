@@ -13,7 +13,7 @@ Complexity = O(n)
 """
 
 # tl:dr -- array slicing by value
-def limit(arr, min_lim = None, max_lim = None):
+def limit_array_value(arr, min_lim = None, max_lim = None):
     result = []
     if min_lim == None:
         for i in arr:

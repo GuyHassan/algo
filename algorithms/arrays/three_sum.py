@@ -15,7 +15,7 @@ A solution set is:
 """
 
 
-def three_sum(array):
+def sum_by_three_elements(array):
     """
     :param array: List[int]
     :return: Set[ Tuple[int, int, int] ]

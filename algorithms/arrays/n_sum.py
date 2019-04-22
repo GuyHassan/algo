@@ -64,7 +64,7 @@ def n_sum(n, nums, target, **kv):
     def same_closure_default(a, b):
         return a == b
 
-    def n_sum(n, nums, target):
+    def sum_n_variables(n, nums, target):
         if n == 2:      # want answers with only 2 terms? easy!
             results = two_sum(nums, target)
         else:
@@ -77,7 +77,7 @@ def n_sum(n, nums, target, **kv):
 
                 prev_num = num
                 n_minus1_results = (
-                    n_sum(                      # recursive call
+                    sum_n_variables(                      # recursive call
                         n - 1,                  # a
                         nums[index + 1:],       # b
                         target - num            # c
@@ -137,4 +137,4 @@ def n_sum(n, nums, target, **kv):
     same_closure = kv.get('same_closure', same_closure_default)
     compare_closure = kv.get('compare_closure', compare_closure_default)
     nums.sort()
-    return n_sum(n, nums, target)
+    return sum_n_variables(n, nums, target)
