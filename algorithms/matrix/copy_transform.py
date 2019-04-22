@@ -12,12 +12,7 @@ def rotate_clockwise(matrix):
 def rotate_counterclockwise(matrix):
     new = []
     for row in matrix:
-        for i, elem in enumerate(reversed(row)):
-            try:
-                new[i].append(elem)
-            except IndexError:
-                new.insert(i, [])
-                new[i].append(elem)
+        duplicate_loop(row,new)
     return new
 
 def top_left_invert(matrix):
@@ -30,16 +25,17 @@ def top_left_invert(matrix):
                 new.insert(i, [])
                 new[i].append(elem)
     return new
-
+def duplicate_loop(row,new):
+    for i, elem in enumerate(reversed(row)):
+        try:
+            new[i].append(elem)
+        except IndexError:
+            new.insert(i, [])
+            new[i].append(elem)
 def bottom_left_invert(matrix):
     new = []
     for row in reversed(matrix):
-        for i, elem in enumerate(reversed(row)):
-            try:
-                new[i].append(elem)
-            except IndexError:
-                new.insert(i, [])
-                new[i].append(elem)
+        duplicate_loop(row,new)
     return new
 
 if __name__ == '__main__':
