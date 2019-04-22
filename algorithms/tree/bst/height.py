@@ -16,7 +16,7 @@ For example: height of tree is 4
 
 """
 import unittest
-from bst import Node
+from algorithms.tree.bst import count_left_node
 from bst import bst
 
 def height(root):
@@ -42,16 +42,7 @@ def height(root):
 
 class TestSuite(unittest.TestCase):
     def setUp(self):
-        self.tree = bst()
-        self.tree.insert(9)
-        self.tree.insert(6)
-        self.tree.insert(12)
-        self.tree.insert(3)
-        self.tree.insert(8)
-        self.tree.insert(10)
-        self.tree.insert(15)
-        self.tree.insert(7)
-        self.tree.insert(18)
+        count_left_node(self)
 
     def test_height(self):
         self.assertEqual(4, height(self.tree.root))
