@@ -31,7 +31,7 @@ Example:
 """
 
 
-def n_sum(n, nums, target, **kv):
+def sum_tuples_from_array(n, nums, target, **kv):
     """
     n: int
     nums: list[object]
