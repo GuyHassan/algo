@@ -24,7 +24,7 @@ AB = | -1 0 3 | x | 0 0 0 | = | -7 0 3 |
 
 
 # Python solution without table (~156ms):
-def multiply(self, a, b):
+def multiply_vectors(self, a, b):
     """
     :type A: List[List[int]]
     :type B: List[List[int]]
@@ -44,7 +44,7 @@ def multiply(self, a, b):
 
 
 # Python solution with only one table for B (~196ms):
-def multiply(self, a, b):
+def multiply_matrix_vector(self, a, b):
     """
     :type A: List[List[int]]
     :type B: List[List[int]]
@@ -68,7 +68,7 @@ def multiply(self, a, b):
     return c
 
 # Python solution with two tables (~196ms):
-def multiply(self, a, b):
+def multiply_matrix(self, a, b):
     """
     :type A: List[List[int]]
     :type B: List[List[int]]
