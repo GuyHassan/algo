@@ -39,8 +39,7 @@ def print_tree(root):
         print_tree(root.left)
         print_tree(root.right)
 
-
-if __name__ == '__main__':
+def update_tree():
     tree = TreeNode(10)
     tree.left = TreeNode(12)
     tree.right = TreeNode(15)
@@ -48,7 +47,10 @@ if __name__ == '__main__':
     tree.left.left.right = TreeNode(100)
     tree.left.right = TreeNode(30)
     tree.right.left = TreeNode(36)
+    return tree
 
+if __name__ == '__main__':
+    tree=update_tree()
     height = max_height(tree)
     print_tree(tree)
     print("height:", height)
