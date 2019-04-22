@@ -42,35 +42,31 @@ def strip_url_params1(url, params_to_strip=None):
             for i in key_value_string:
                 _token = i.split('=')
                 if _token[0]:
-                    helpFunc1(_token,params_to_strip,result)
-                else:
-                    helpFunc2(_token,params_to_strip,result)
+                    length = len(_token[0])
+                    if length == 1:
+                        if _token and (not(_token[0] in dict)):
+                            if params_to_strip:
+                                if _token[0] != params_to_strip[0]:
+                                    dict[_token[0]] = _token[1]
+                                    result = result + _token[0] + '=' + _token[1]
+                            else:
+                                if not _token[0] in dict:
+                                    dict[_token[0]] = _token[1]
+                                    result = result + _token[0] + '=' + _token[1]
+                    else:
+                        check = _token[0]
+                        letter = check[1]
+                        if _token and (not(letter in dict)):
+                            if params_to_strip:
+                                if letter != params_to_strip[0]:
+                                    dict[letter] = _token[1]
+                                    result = result + _token[0] + '=' + _token[1]
+                            else:
+                                if not letter in dict:
+                                    dict[letter] = _token[1]
+                                    result = result + _token[0] + '=' + _token[1]
     return result
-def helpFunc1(_token,params_to_strip,result):
-    length = len(_token[0])
-    if length == 1:
-        if _token and (not (_token[0] in dict)):
-            if params_to_strip:
-                if _token[0] != params_to_strip[0]:
-                    dict[_token[0]] = _token[1]
-                    result = result + _token[0] + '=' + _token[1]
-            else:
-                if not _token[0] in dict:
-                    dict[_token[0]] = _token[1]
-                    result = result + _token[0] + '=' + _token[1]
 
-def helpFunc2(_token,params_to_strip,result):
-    check = _token[0]
-    letter = check[1]
-    if _token and (not (letter in dict)):
-        if params_to_strip:
-            if letter != params_to_strip[0]:
-                dict[letter] = _token[1]
-                result = result + _token[0] + '=' + _token[1]
-        else:
-            if not letter in dict:
-                dict[letter] = _token[1]
-                result = result + _token[0] + '=' + _token[1]
 # A very friendly pythonic solution (easy to follow)
 def strip_url_params2(url, param_to_strip=[]):
     if '?' not in url:
