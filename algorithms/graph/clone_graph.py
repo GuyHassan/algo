@@ -45,17 +45,18 @@ def clone_graph1(node):
     queue = collections.deque([node])
     while queue:
         node = queue.popleft()
-        for neighbor in node.neighbors:
-            if neighbor not in dic:  # neighbor is not visited
-                neighbor_copy = UndirectedGraphNode(neighbor.label)
-                dic[neighbor] = neighbor_copy
-                dic[node].neighbors.append(neighbor_copy)
-                queue.append(neighbor)
-            else:
-                dic[node].neighbors.append(dic[neighbor])
+        clone_graph_loop(node,dic,queue)
     return node_copy
 
-
+def clone_graph_loop(node,dic,queue):
+    for neighbor in node.neighbors:
+        if neighbor not in dic:  # neighbor is not visited
+            neighbor_copy = UndirectedGraphNode(neighbor.label)
+            dic[neighbor] = neighbor_copy
+            dic[node].neighbors.append(neighbor_copy)
+            queue.append(neighbor)
+        else:
+            dic[node].neighbors.append(dic[neighbor])
 # DFS iteratively
 def clone_graph2(node):
     if not node:
@@ -65,14 +66,7 @@ def clone_graph2(node):
     stack = [node]
     while stack:
         node = stack.pop()
-        for neighbor in node.neighbors:
-            if neighbor not in dic:
-                neighbor_copy = UndirectedGraphNode(neighbor.label)
-                dic[neighbor] = neighbor_copy
-                dic[node].neighbors.append(neighbor_copy)
-                stack.append(neighbor)
-            else:
-                dic[node].neighbors.append(dic[neighbor])
+        clone_graph_loop(node,dic,stack)
     return node_copy
 
 
