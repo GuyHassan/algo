@@ -31,20 +31,19 @@ def spiral_traversal(matrix):
         for i in range(row_begin, row_end+1):
             res.append(matrix[i][col_end])
         col_end -= 1
-
-        if row_begin <= row_end:
-            for i in range(col_end, col_begin-1, -1):
-                res.append(matrix[row_end][i])
-        row_end -= 1
-
-        if col_begin <= col_end:
-            for i in range(row_end, row_begin-1, -1):
-                res.append(matrix[i][col_begin])
-        col_begin += 1
-
+        helpFunc1(row_begin,row_end,col_end,col_begin,res,matrix)
     return res
 
+def helpFunc1(row_begin,row_end,col_end,col_begin,res,matrix):
+    if row_begin <= row_end:
+        for i in range(col_end, col_begin - 1, -1):
+            res.append(matrix[row_end][i])
+    row_end -= 1
 
+    if col_begin <= col_end:
+        for i in range(row_end, row_begin - 1, -1):
+            res.append(matrix[i][col_begin])
+    col_begin += 1
 if __name__ == "__main__":
     mat = [[1, 2, 3],
            [4, 5, 6],
